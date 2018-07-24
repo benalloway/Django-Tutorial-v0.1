@@ -1,6 +1,19 @@
 {% extends "base_generic.html" %}
-
+{% block title %}
+<title>Local Library - Index</title>
+{% endblock %}
 {% block content %}
 <h1>Local Library Home</h1>
-<p>Welcome to <em>LocalLibrary</em>, a very basic Django website developed by Benjamin Alloway as a tutorial on how to use the Django web-framework.</p>
+	<p>Welcome to <em>LocalLibrary</em>, a very basic Django website developed by Benjamin Alloway as a tutorial on how to use the Django web-framework.</p>
+
+<form>
+<h2>Dynamic content</h2>
+	<p>The Library has the following record counts:</p>
+	<li><strong>Books: </strong>{{ num_books }}</li>
+	<li><strong>Copies: </strong>{{ num_instances }}</li>
+	<li><strong>Copies available: </strong>{{ num_instances_available }}</li>
+	<li><strong>Authors: </strong>{{ num_authors }}</li>
+	<li><strong>Genres: </strong>{{ num_genres }}</li>
+	<li><strong>Summary Contains: </strong><input type="text" name="summary" value="{{ summary_search }}"> {{ num_books_summary }}</li>
+</form>
 {% endblock %}
