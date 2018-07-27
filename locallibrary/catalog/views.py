@@ -34,8 +34,11 @@ def index(request):
 		context = {'num_books':num_books, 'num_instances':num_instances, 'num_instances_available':num_instances_available, 'num_authors':num_authors, 'num_genres':num_genres, 'num_books_summary':num_books_summary, 'summary_search':summary},
 	)
 
+# Class based view, using generic list view
 class BookListView(generic.ListView):
 	model = Book
+	paginate_by = 10
 
+# Class based view, using generic detail view
 class BookDetailView(generic.DetailView):
 	model = Book
