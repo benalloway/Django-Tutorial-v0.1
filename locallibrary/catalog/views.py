@@ -37,7 +37,7 @@ def index(request):
 # Class based view, using generic list view
 class BookListView(generic.ListView):
 	model = Book
-	paginate_by = 10
+	paginate_by = 2
 
 # Class based view, using generic detail view
 class BookDetailView(generic.DetailView):
