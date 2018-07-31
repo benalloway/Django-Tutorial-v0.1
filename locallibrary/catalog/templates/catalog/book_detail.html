@@ -21,6 +21,7 @@
 		<hr>
 		<p class="{% if copy.status == 'a' %}text-success{% elif copy.status == 'm' %}text-danger{% else %}text-warning{% endif %}">{{ copy.get_status_display }}</p>
 		{% if copy.status != 'a' %}<p><strong>Due to be returned: </strong> {{ copy.due_back }}</p>{% endif %}
+		{% if copy.borrower %}<p><strong>Borrower: </strong>{{ copy.borrower }}</p>{% endif %}
 		<p><strong>Imprint: </strong>{{ copy.imprint }}</p>
 		<p class="text-muted"><strong>Id: </strong>{{copy.id}}</p>
 		{% endfor %}
