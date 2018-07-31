@@ -1,8 +1,14 @@
 from django.shortcuts import render
 from .models import Book, Author, BookInstance, Genre
 from django.views import generic
-# Create your views here.
 
+# @login_required at function based views to require login to view page (will redirect to login page)
+from django.contrib.auth.decorators import login_required
+
+# Use LoginRequiredMixin as parameter in class based views to require login for those pages
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+# Create your views here.
 
 ################
 # Index Page
