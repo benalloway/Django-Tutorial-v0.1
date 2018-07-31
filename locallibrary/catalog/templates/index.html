@@ -16,4 +16,6 @@
 	<li><strong>Genres: </strong>{{ num_genres }}</li>
 	<li><strong>Summary Contains: </strong><input type="text" name="summary" value="{{ summary_search }}"> {{ num_books_summary }}</li>
 </form>
+
+<p>You have visited this page {{ num_visits }}{% if num_visits == 1 %} time{% else %} times{% endif %}.</p>
 {% endblock %}
