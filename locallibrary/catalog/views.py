@@ -4,9 +4,11 @@ from django.views import generic
 
 # @login_required at function based views to require login to view page (will redirect to login page)
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import permission_required
 
 # Use LoginRequiredMixin as parameter in class based views to require login for those pages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin
 
 # Create your views here.
 
@@ -74,8 +76,19 @@ class AuthorDetailView(generic.DetailView):
 class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
 	"""Generic class-based view listing books on loan to current user."""
 	model = BookInstance
-	template_name='catalog/bookinstance_list_borrowed_user.html'
+	template_name = 'catalog/bookinstance_list_borrowed_user.html'
 	paginate_by = 10
-	
+
 	def get_queryset(self):
 		return BookInstance.objects.filter(borrower=self.request.user).filter(status__exact='o').order_by('due_back')
+
+class LoanedBooksListView(PermissionRequiredMixin, LoginRequiredMixin, generic.ListView):
+	"""docstring for LoanedBooksListView"""
+	model = BookInstance
+	template_name = 'catalog/bookinstance_list_borrowed_librarian.html'
+	paginate_by = 10
+	permission_required = 'catalog.can_mark_returned'
+
+	def get_queryset(self):
+		return BookInstance.objects.filter(status__exact='o').order_by('due_back')
+		
