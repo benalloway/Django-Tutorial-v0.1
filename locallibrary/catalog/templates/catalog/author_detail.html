@@ -9,6 +9,13 @@
 
 	<p>{{ author.date_of_birth }} - {% if author.date_of_death %}{{ author.date_of_death }}{% endif %}</p>
 
+	{% if perms.catalog.can_delete_author %}
+	<button><a href="{% url 'author_delete' author.pk %}" class="text-danger" style="text-decoration: none;" >Delete author</a></button>
+	{% endif %}
+	{% if perms.catalog.can_change_author %}
+	<button><a href="{% url 'author_update' author.pk %}" class="text-success" style="text-decoration: none;" >Update author</a></button>
+	{% endif %}
+
 	<div style="margin-left: 20px; margin-top: 20px;">
 		<h4>Books</h4>
 

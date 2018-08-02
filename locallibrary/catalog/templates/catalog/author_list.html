@@ -15,7 +15,7 @@
 			
 				<li>
 					
-					<a href="{{ author.get_absolute_url }}">{{ author.last_name }}, {{ author.first_name }}</a>
+					<a href="{{ author.get_absolute_url }}">{{ author.last_name }}, {{ author.first_name }}</a><span> - <a class="text-success" href="{% url 'author_update' author.pk %}">Update</a> <a class="text-danger" href="{% url 'author_delete' author.pk %}">Delete</a></span>
 				
 				</li>
 			

@@ -13,6 +13,12 @@
 	<p><strong>ISBN: </strong>{{ book.isbn }}</p>
 	<p><strong>Language: </strong>{{ book.language }}</p>
 	<p><strong>Genre: </strong>{% for genre in book.genre.all %} {{ genre }} {% if not forloop.last %}, {% endif %} {% endfor %}</p>
+	{% if perms.catalog.can_delete_book %}
+	<button><a href="{% url 'book_delete' book.pk %}" class="text-danger" style="text-decoration: none;" >Delete Book</a></button>
+	{% endif %}
+	{% if perms.catalog.can_change_book %}
+	<button><a href="{% url 'book_update' book.pk %}" class="text-success" style="text-decoration: none;" >Update Book</a></button>
+	{% endif %}
 
 	<div style="margin-left: 20px; margin-top: 20px;">
 		<h4>Copies</h4>

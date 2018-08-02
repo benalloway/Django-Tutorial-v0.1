@@ -15,7 +15,7 @@
 			
 				<li>
 					
-					<a href="{{ book.get_absolute_url }}">{{ book.title }}</a>
+					<a href="{{ book.get_absolute_url }}">{{ book.title }}</a><span> - <a class="text-success" href="{% url 'book_update' book.pk %}">Update</a> <a class="text-danger" href="{% url 'book_delete' book.pk %}">Delete</a></span>
 				
 				</li>
 			

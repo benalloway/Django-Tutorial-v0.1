@@ -11,6 +11,7 @@ import datetime
 # import Model for Create Update Delte Requests
 from .models import Author
 from .models import Book
+from django.contrib.auth.models import User
 
 # @login_required at function based views to require login to view page (will redirect to login page)
 from django.contrib.auth.decorators import login_required
@@ -75,7 +76,7 @@ def index(request):
 # Class based view, using generic list view
 class BookListView(generic.ListView):
     model = Book
-    paginate_by = 2
+    paginate_by = 10
 
 
 # Class based view, using generic detail view
@@ -95,7 +96,7 @@ class BookCreate(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
 class BookUpdate(PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
     model = Book
     permission_required = 'catalog.can_change_book'
-    fields = ['author', 'summary', 'language', 'genre']
+    fields = ['title', 'author', 'summary', 'language', 'genre']
 
 
 class BookDelete(PermissionRequiredMixin, LoginRequiredMixin, DeleteView):
@@ -169,7 +170,7 @@ def renew_book_librarian(request, pk):
 # Class based view, using generic list view
 class AuthorListView(generic.ListView):
     model = Author
-    paginate_by = 2
+    paginate_by = 10
 
 
 # Class based view, using generic detail view
@@ -197,3 +198,15 @@ class AuthorDelete(PermissionRequiredMixin, LoginRequiredMixin, DeleteView):
     permission_required = 'catalog.can_delete_author'
     template_name_suffix = '_delete'
     success_url = reverse_lazy('authors')
+
+
+#########################################
+# Account Read Update Views
+#########################################
+
+class MyAccountView(LoginRequiredMixin, generic.DetailView):
+    model = User
+
+class MyAccountEditView(LoginRequiredMixin, UpdateView):
+    model = User
+    fields = '__all__'

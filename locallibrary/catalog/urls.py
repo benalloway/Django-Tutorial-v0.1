@@ -6,11 +6,13 @@ from . import views
 #####################
 urlpatterns = [
 	path('', views.index, name='index'),
+	path('myaccount/<int:pk>', views.MyAccountView.as_view(), name='myaccount'),
+	path('myaccount/<int:pk>/edit/', views.MyAccountEditView.as_view(), name='myaccount-edit'),
 ]
 
 
 ########################
-# Authors url patterns
+# Author url patterns
 ########################
 urlpatterns += [
 	path('authors/', views.AuthorListView.as_view(), name='authors'),
@@ -22,7 +24,7 @@ urlpatterns += [
 
 
 #######################
-# Books url patterns
+# Book url patterns
 #######################
 urlpatterns += [
 	path('books/', views.BookListView.as_view(), name='books'),
@@ -31,6 +33,16 @@ urlpatterns += [
 	path('book/<int:pk>/update/', views.BookUpdate.as_view(), name='book_update'),
 	path('book/<int:pk>/delete/', views.BookDelete.as_view(), name='book_delete'),
 	path('book/<uuid:pk>/renew/', views.renew_book_librarian, name='renew-book-librarian'),
-	path('mybooks/', views.LoanedBooksByUserListView.as_view(), name='my-borrowed'),
-	path('loanedbooks/', views.LoanedBooksListView.as_view(), name='all-borrowed'),
+	path('myborrowedbooks/', views.LoanedBooksByUserListView.as_view(), name='my-borrowed'),
+	path('allborrowedbooks/', views.LoanedBooksListView.as_view(), name='all-borrowed'),
+]
+
+
+#######################
+# BookInstance url patterns
+#######################
+urlpatterns += [
+	path('book/<uuid:pk>/renew/', views.renew_book_librarian, name='renew-book-librarian'),
+	path('myborrowedbooks/', views.LoanedBooksByUserListView.as_view(), name='my-borrowed'),
+	path('allborrowedbooks/', views.LoanedBooksListView.as_view(), name='all-borrowed'),
 ]
