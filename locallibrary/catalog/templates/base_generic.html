@@ -25,7 +25,7 @@
           <!-- <li>User: {{ user.get_username }}</li> -->
           <li>User: {{ user.get_username }}</li>
           {% if perms.catalog.can_mark_returned %}
-          <li><a href="{% url 'borrowed' %}">Borrowed Books</a></li>
+          <li><a href="{% url 'all-borrowed' %}">All Borrowed Books</a></li>
           {% else %}
           <li><a href="{% url 'my-borrowed' %}">My Borrowed</a></li>
           {% endif %}
