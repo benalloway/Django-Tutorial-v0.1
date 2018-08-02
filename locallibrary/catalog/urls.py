@@ -7,7 +7,7 @@ from . import views
 urlpatterns = [
 	path('', views.index, name='index'),
 	path('myaccount/<int:pk>', views.MyAccountView.as_view(), name='myaccount'),
-	path('myaccount/<int:pk>/edit/', views.MyAccountEditView.as_view(), name='myaccount-edit'),
+	path('myaccount/edit/<int:pk>', views.MyAccountEditView.as_view(), name='myaccount-edit'),
 ]
 
 

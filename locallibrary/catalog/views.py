@@ -202,11 +202,21 @@ class AuthorDelete(PermissionRequiredMixin, LoginRequiredMixin, DeleteView):
 #########################################
 # Account Read Update Views
 #########################################
+from django.contrib.auth.mixins import UserPassesTestMixin
 
-class MyAccountView(LoginRequiredMixin, generic.DetailView):
+class MyAccountView(UserPassesTestMixin, LoginRequiredMixin, generic.DetailView):
     model = User
+    
+    # Check to make sure you can only access your account page
+    def test_func(self):
+        return self.kwargs['pk'] == self.request.user.id
 
-class MyAccountEditView(LoginRequiredMixin, UpdateView):
+
+class MyAccountEditView(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
     model = User
     fields = ['username', 'first_name', 'last_name', 'email']
     success_url = reverse_lazy('index' )
+
+    # Check to make sure you can only access your account page
+    def test_func(self):
+        return self.kwargs['pk'] == self.request.user.id
