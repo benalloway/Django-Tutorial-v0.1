@@ -23,7 +23,6 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 
 # For views handling Django Forms
 from .forms import RenewBookForm
-from .forms import RenewBookModelForm
 
 # Create your views here.
 
@@ -209,4 +208,5 @@ class MyAccountView(LoginRequiredMixin, generic.DetailView):
 
 class MyAccountEditView(LoginRequiredMixin, UpdateView):
     model = User
-    fields = '__all__'
+    fields = ['username', 'first_name', 'last_name', 'email']
+    success_url = reverse_lazy('index' )

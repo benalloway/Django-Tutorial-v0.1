@@ -26,25 +26,10 @@ class RenewBookForm(forms.Form):
 
 # Same as above class, just using ModelForm instead of Form, this way you pass a model to it: works really well for longer forms.
 from django.forms import ModelForm
-from .models import BookInstance
+from django.contrib.auth.models import User
 
-class RenewBookModelForm(ModelForm):
-    def clean_due_back(self):
-       data = self.cleaned_data['due_back']
-       
-       #Check date is not in past.
-       if data < datetime.date.today():
-           raise ValidationError(_('Invalid date - renewal in past'))
-
-       #Check date is in range librarian allowed to change (+4 weeks)
-       if data > datetime.date.today() + datetime.timedelta(weeks=4):
-           raise ValidationError(_('Invalid date - renewal more than 4 weeks ahead'))
-
-       # Remember to always return the cleaned data.
-       return data
+class EditUserModelForm(ModelForm):
 
     class Meta:
-        model = BookInstance
-        fields = ['due_back',]
-        labels = { 'due_back': _('Renewal date'), }
-        help_texts = { 'due_back': _('Enter a date between now and 4 weeks (default 3).'), }
+        model = User
+        fields = '__all__'
